@@ -84,10 +84,10 @@ public class Menus {
 
     private static void menuActualizarParticipante() {
         boolean volver = false;
-        do {
-            Participante p = Formularios.getParticipante();
+        Participante p = Formularios.getParticipante();
+        g.imprimirParticipante(p);
+        do {            
             if (p != null) {
-                g.imprimirParticipante(p);
                 int opcion = Formularios.menuActualizarParticipante();
                 switch (opcion) {
                     case 1:
@@ -97,7 +97,9 @@ public class Menus {
                         p.setApellido(Campos.campoDeTexto(Campos.APELLIDO));
                         break;
                     case 3:
-                        p.setAuspiciantes(Campos.campoDeTexto(Campos.AUSPICIANTES));
+                        String auspiciantes = Campos.campoDeTexto(Campos.AUSPICIANTES);
+                        p.setAuspiciantes(auspiciantes);
+                        g.guardarAuspiciantes(auspiciantes);
                         break;
                     case 4:
                         p.setEdad(Campos.campoDeNumeros(Campos.EDAD));

@@ -57,7 +57,7 @@ public class ListaAuspiciantes {
         return cantidad; 
     }
     
-    public String getAuspicianteXPosicion(int pos){ 
+    public String getAuspiciantePorPosicion(int pos){ 
         int posActual = 0; 
         NodoAuspiciante aux = this.primero; 
         while ( posActual < pos  ){ 

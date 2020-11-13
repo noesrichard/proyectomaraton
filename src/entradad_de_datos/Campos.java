@@ -23,7 +23,8 @@ public class Campos {
         TODO(".{0,}"),
         SEXO("M|F"),
         NUMERO_ENTERO("[0-9]+"),
-        TIEMPO("[0-9]{2}");
+        HORAS("[0-9]{2}"),
+        MIN_SEG("[00-60]");
 
         private String valor;
 
@@ -63,15 +64,15 @@ public class Campos {
             case HORA:
                 return Consola.ingresarDato(Mensajes.ENTRADA.HORA.txt(),
                                             Mensajes.ERROR.TIEMPO.txt(),
-                                            REGEX.TIEMPO.txt());    
+                                            REGEX.HORAS.txt());    
             case MIN:
                 return Consola.ingresarDato(Mensajes.ENTRADA.MINUTOS.txt(),
                                             Mensajes.ERROR.TIEMPO.txt(),
-                                            REGEX.TIEMPO.txt());
+                                            REGEX.MIN_SEG.txt());
             case SEG:
                 return Consola.ingresarDato(Mensajes.ENTRADA.SEGUNDOS.txt(),
                                             Mensajes.ERROR.TIEMPO.txt(),
-                                            REGEX.TIEMPO.txt());
+                                            REGEX.MIN_SEG.txt());
         }
         return "";
     }

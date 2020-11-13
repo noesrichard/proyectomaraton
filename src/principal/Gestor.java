@@ -44,7 +44,7 @@ public class Gestor {
         System.out.println("---------------------------------------------------"
                 + "------------------------------------------------------------"
                 + "-------");
-        System.out.printf("%10s %20s %20s %30s %4s %4s %9s %6s",
+        System.out.printf("%10s %20s %20s %30s %4s %4s %9s %6s \n",
                 "CEDULA", "NOMBRE", "APELLIDO", "AUSPICIANTES",
                 "EDAD", "SEXO", "CATEGORIA", "HORA");
         System.out.println("---------------------------------------------------"
@@ -93,26 +93,28 @@ public class Gestor {
     public void imprimirAuspiciantes() {
         listaAuspiciantes.imprimir();
     }
-    
-    public int cantidadDeAuspiciantes(){ 
+
+    public int cantidadDeAuspiciantes() {
         return listaAuspiciantes.length();
     }
 
 //----------------------------------PARTICIPANTES-------------------------------
+    public char asignarCategoria(Participante p) {
+        int edad = p.getEdad();
+        if ((edad >= EDAD_A) && (edad < EDAD_B)) {
+            return 'A';
+        } else if ((edad >= EDAD_B) && (edad < EDAD_C)) {
+            return 'B';
+        } else if (edad >= EDAD_C) {
+            return 'C';
+        }
+        return 'N';
+    }
 
     //CRUD
     public boolean inscribirParticipante(Participante p) {
-        int edadParticipante = p.getEdad();
-        if ((edadParticipante >= EDAD_A)&& (edadParticipante < EDAD_B)){
-            listaParticipantes.inscribir(p, 'A');
-            return true;
-        } else if ((edadParticipante >= EDAD_B) && (edadParticipante < EDAD_C)){
-            listaParticipantes.inscribir(p, 'B');
-            return true;
-        } else if (edadParticipante >= EDAD_C) {
-            listaParticipantes.inscribir(p, 'C');
-            return true;
-        }
+        char categoria = asignarCategoria(p);
+        listaParticipantes.inscribir(p, categoria);
         return false;
     }
 
@@ -120,6 +122,7 @@ public class Gestor {
         return listaParticipantes.borrar(cedula);
 
     }
+
     public void imprimirParticipante(Participante p) {
         imprimirCabecera();
         listaParticipantes.imprimirParticipante(p);
@@ -129,19 +132,13 @@ public class Gestor {
         Participante p = getParticipante(cedula);
         if (p != null) {
             listaParticipantes.borrar(cedula);
-            int edadParticipante = p.getEdad();
-            if ((edadParticipante >= EDAD_A)&& (edadParticipante < EDAD_B)){
-                listaParticipantesOrdenada.registrar(p, hora, 'A');
-            } else if ((edadParticipante >= EDAD_B) && (edadParticipante < EDAD_C)){
-                listaParticipantesOrdenada.registrar(p, hora, 'B');
-            } else if (edadParticipante >= EDAD_C) {
-                listaParticipantesOrdenada.registrar(p, hora, 'C');
-            }
+            char categoria = asignarCategoria(p);
+            listaParticipantesOrdenada.registrar(p, hora, categoria);
             return true;
         }
         return false;
     }
-    
+
     public boolean existeParticipante(String cedula) {
         return (listaParticipantes.getParticipante(cedula) != null);
     }
@@ -149,7 +146,7 @@ public class Gestor {
     public boolean noParticipo(String cedula) {
         return listaParticipantes.noParticipo(cedula);
     }
-    
+
     public Participante getParticipante(String cedula) {
         return listaParticipantes.getParticipante(cedula);
     }
@@ -157,7 +154,7 @@ public class Gestor {
 //-------------------------------REPORTES---------------------------------------
     public void reportePorAuspiciante(int pos) {
         imprimirCabecera();
-        String auspiciante = listaAuspiciantes.getAuspicianteXPosicion(pos - 1);
+        String auspiciante = listaAuspiciantes.getAuspiciantePorPosicion(pos - 1);
         listaParticipantesOrdenada.imprimirPorAuspiciante(auspiciante);
     }
 
