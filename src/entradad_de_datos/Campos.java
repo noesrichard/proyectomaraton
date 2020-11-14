@@ -24,7 +24,7 @@ public class Campos {
         SEXO("M|F"),
         NUMERO_ENTERO("[0-9]+"),
         HORAS("[0-9]{2}"),
-        MIN_SEG("[00-60]");
+        MIN_SEG("[0-5][0-9]");
 
         private String valor;
 
