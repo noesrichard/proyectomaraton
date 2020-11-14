@@ -25,7 +25,6 @@ public class Consola {
         if (instancia == null) {
             instancia = new Consola();
         }
-
         return instancia;
     }
 

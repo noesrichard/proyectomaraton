@@ -15,9 +15,9 @@ import listas.ListaParticipantes;
  */
 public class Gestor {
 
-    private ListaParticipantes listaParticipantes;
-    private ListaParticipantesOrdenada listaParticipantesOrdenada;
-    private ListaAuspiciantes listaAuspiciantes;
+    private final ListaParticipantes listaParticipantes;
+    private final ListaParticipantesOrdenada listaParticipantesOrdenada;
+    private final ListaAuspiciantes listaAuspiciantes;
     private boolean inicioMaraton, finalMaraton;
 
     private static Gestor instancia = null;
@@ -69,7 +69,7 @@ public class Gestor {
         } else if (inicioMaraton && finalMaraton) {
             return "Termino";
         }
-        return "Nada";
+        return null;
     }
 
 //----------------------------AUSPICIANTES-----------------------------------
@@ -114,13 +114,11 @@ public class Gestor {
     //CRUD
     public boolean inscribirParticipante(Participante p) {
         char categoria = asignarCategoria(p);
-        listaParticipantes.inscribir(p, categoria);
-        return false;
+        return listaParticipantes.inscribir(p, categoria);
     }
 
     public boolean borrarParticipante(String cedula) {
         return listaParticipantes.borrar(cedula);
-
     }
 
     public void imprimirParticipante(Participante p) {

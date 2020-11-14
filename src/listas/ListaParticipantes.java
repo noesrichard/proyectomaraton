@@ -36,7 +36,6 @@ public class ListaParticipantes {
             }
             aux.siguiente = nuevo;
             nuevo.anterior = aux;
-
         }
         return true;
     }

@@ -25,19 +25,22 @@ public class Cedula implements Validador {
     @Override
     public boolean validar(String dato) {
         Gestor g = Gestor.get_();
-
         switch (this.opcion) {
             case CEDULA_NUEVA:
                 if (validarCedula(dato)) {
-                    //Si existe un participante con esa cedula retorna 
-                    //falso ya que quiero ingresar una nueva cedula.
+                    /*
+                     *Si existe un participante con esa cedula retorna 
+                     *falso ya que quiero ingresar una nueva cedula.
+                     */
                     return !g.existeParticipante(dato);
                 }
                 return false;
             case CEDULA_EXISTENTE:
                 if (validarCedula(dato)) {
-                    //Si existe un participante con esa cedula retorna verdadero
-                    //ya que quiero validar que esa cedula existe.
+                    /*
+                     *Si existe un participante con esa cedula retorna verdadero
+                     *ya que quiero validar que esa cedula existe.
+                     */
                     return g.existeParticipante(dato);
                 }
                 return false;

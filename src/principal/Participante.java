@@ -52,8 +52,9 @@ public class Participante {
     }
 
     public void imprimir(char categoria, String hora) {
-        
-        System.out.format("%10s %20s %20s %30s %4s %4s %9s %8s \n", this.cedula, this.nombre, this.apellido, this.auspiciantes, this.edad, this.sexo, categoria, hora);
+        System.out.format("%10s %20s %20s %30s %4s %4s %9s %8s \n", 
+                this.cedula, this.nombre, this.apellido, this.auspiciantes, 
+                this.edad, this.sexo, categoria, hora);
     }
 
     public String getCedula() {
