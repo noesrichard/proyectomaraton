@@ -44,7 +44,7 @@ public class Gestor {
         System.out.println("---------------------------------------------------"
                 + "------------------------------------------------------------"
                 + "-------");
-        System.out.printf("%10s %20s %20s %30s %4s %4s %9s %6s \n",
+        System.out.printf("%5s %10s %20s %20s %30s %4s %4s %9s %6s \n","ID",
                 "CEDULA", "NOMBRE", "APELLIDO", "AUSPICIANTES",
                 "EDAD", "SEXO", "CATEGORIA", "HORA");
         System.out.println("---------------------------------------------------"
@@ -126,12 +126,12 @@ public class Gestor {
         listaParticipantes.imprimirParticipante(p);
     }
 
-    public boolean registrarHoraLlegada(String cedula, int hora) {
-        Participante p = getParticipante(cedula);
+    public boolean registrarHoraLlegada(int id, int hora) {
+        Participante p = getParticipantePorId(id);
         if (p != null) {
-            listaParticipantes.borrar(cedula);
+            listaParticipantes.borrarPorId(id);
             char categoria = asignarCategoria(p);
-            listaParticipantesOrdenada.registrar(p, hora, categoria);
+            listaParticipantesOrdenada.registrar(p, hora, categoria,id);
             return true;
         }
         return false;
@@ -147,6 +147,10 @@ public class Gestor {
 
     public Participante getParticipante(String cedula) {
         return listaParticipantes.getParticipante(cedula);
+    }
+    
+    public Participante getParticipantePorId(int id){ 
+        return listaParticipantes.getParticipantePorId(id);
     }
 
 //-------------------------------REPORTES---------------------------------------

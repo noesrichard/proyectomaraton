@@ -16,15 +16,16 @@ import principal.Participante;
 public class ListaParticipantesOrdenada {
 
     NodoParticipantes primero;
+    
 
     public ListaParticipantesOrdenada() {
         this.primero = null;
     }
 
-    public boolean registrar(Participante participante, int hora, char c) {
+    public boolean registrar(Participante participante, int hora, char c, int id ) {
         NodoParticipantes nuevo;
         try {
-            nuevo = new NodoParticipantes(participante, hora, c);
+            nuevo = new NodoParticipantes(participante, hora, c, id);
         } catch (Exception e) {
             return false;
         }
@@ -60,7 +61,7 @@ public class ListaParticipantesOrdenada {
     public void imprimir() {
         NodoParticipantes aux = this.primero;
         while (aux != null) {
-            aux.participante.imprimir(aux.categoria,convertirHora(aux.hora));
+            aux.participante.imprimir(aux.id, aux.categoria,convertirHora(aux.hora));
             aux = aux.siguiente;
         }
     }
@@ -69,7 +70,7 @@ public class ListaParticipantesOrdenada {
         NodoParticipantes aux = this.primero;
         while (aux != null) {
             if (aux.categoria == categoria) {
-                aux.participante.imprimir(aux.categoria,convertirHora(aux.hora));
+                aux.participante.imprimir(aux.id, aux.categoria,convertirHora(aux.hora));
             }
             aux = aux.siguiente;
         }
@@ -79,7 +80,7 @@ public class ListaParticipantesOrdenada {
         NodoParticipantes aux = this.primero;
         while (aux != null) {
             if (aux.participante.getAuspiciantes().contains(auspiciante)) {
-                aux.participante.imprimir(aux.categoria,convertirHora(aux.hora));
+                aux.participante.imprimir(aux.id, aux.categoria,convertirHora(aux.hora));
             }
             aux = aux.siguiente;
         }

@@ -116,13 +116,13 @@ public class Formularios {
     }
 
     public static boolean registrarHoraLlegada() {
-        String cedula = Campos.campoDeCedula(Campos.CEDULA_EXISTENTE);
-        if (!cedula.equals("-1")) {
+        int id  = Campos.campoDeNumeros(Campos.EDAD);
+        if (id != -1) {
             String  hora = Campos.campoDeTiempo(Campos.HORA);
             String  min = Campos.campoDeTiempo(Campos.MIN);
             String  seg = Campos.campoDeTiempo(Campos.SEG);
             int     tiempo = Integer.parseInt(hora + min + seg);
-            if (g.registrarHoraLlegada(cedula, tiempo)) {
+            if (g.registrarHoraLlegada(id, tiempo)) {
                 System.out.println(Mensajes.NOTIF.TIEMPO.txt());
                 return true;
             }

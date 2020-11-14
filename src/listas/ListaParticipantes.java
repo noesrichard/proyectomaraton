@@ -15,6 +15,7 @@ import principal.Participante;
 public class ListaParticipantes {
 
     NodoParticipantes primero;
+    int id = 1; 
 
     public ListaParticipantes() {
         this.primero = null;
@@ -23,7 +24,7 @@ public class ListaParticipantes {
     public boolean inscribir(Participante dato, char categoria) {
         NodoParticipantes nuevo;
         try {
-            nuevo = new NodoParticipantes(dato, categoria);
+            nuevo = new NodoParticipantes(dato, categoria,id);
         } catch (Exception e) {
             return false;
         }
@@ -37,6 +38,7 @@ public class ListaParticipantes {
             aux.siguiente = nuevo;
             nuevo.anterior = aux;
         }
+        id ++; 
         return true;
     }
 
@@ -66,6 +68,32 @@ public class ListaParticipantes {
         }
         return false;
     }
+    public boolean borrarPorId(int id) {
+        NodoParticipantes aux = this.primero;
+        if (aux.id == id) {
+            this.primero = aux.siguiente;
+            return true;
+        }
+        while (aux.siguiente != null) {
+            if (aux.id == id) {
+
+                aux.anterior.siguiente = aux.siguiente;
+                aux.siguiente.anterior = aux.anterior;
+
+                aux.anterior = null;
+                aux.siguiente = null;
+                return true;
+            }
+
+            aux = aux.siguiente;
+        }
+        if (aux.siguiente == null && aux.id == id){
+            aux.anterior.siguiente = null;
+            aux.anterior = null;
+            return true;
+        }
+        return false;
+    }
 
     public boolean noParticipo(String cedula) {
         NodoParticipantes aux = this.primero;
@@ -82,7 +110,7 @@ public class ListaParticipantes {
     public void imprimir() {
         NodoParticipantes aux = this.primero;
         while (aux != null) {
-            aux.participante.imprimir(aux.categoria,String.valueOf(aux.hora));
+            aux.participante.imprimir(aux.id, aux.categoria,String.valueOf(aux.hora));
             aux = aux.siguiente;
         }
     }
@@ -91,7 +119,7 @@ public class ListaParticipantes {
         NodoParticipantes aux = this.primero;
         while (aux != null) {
             if (!aux.participoPregunta) {
-                aux.participante.imprimir(aux.categoria,String.valueOf(aux.hora));
+                aux.participante.imprimir(aux.id, aux.categoria,String.valueOf(aux.hora));
             }
             aux = aux.siguiente;
         }
@@ -101,7 +129,7 @@ public class ListaParticipantes {
         NodoParticipantes aux = this.primero;
         while (aux != null) {
             if (aux.hora == -1 && aux.participoPregunta) {
-                aux.participante.imprimir(aux.categoria,String.valueOf(aux.hora));
+                aux.participante.imprimir(aux.id , aux.categoria,String.valueOf(aux.hora));
             }
             aux = aux.siguiente;
         }
@@ -111,7 +139,7 @@ public class ListaParticipantes {
         NodoParticipantes aux = this.primero;
         while (aux != null) {
             if (aux.participante == p) {
-                aux.participante.imprimir(aux.categoria,String.valueOf(aux.hora));
+                aux.participante.imprimir(aux.id, aux.categoria,String.valueOf(aux.hora));
             }
             aux = aux.siguiente;
         }
@@ -126,5 +154,26 @@ public class ListaParticipantes {
             aux = aux.siguiente;
         }
         return null;
+    }
+    public Participante getParticipantePorId(int id) {
+        NodoParticipantes aux = this.primero;
+        while (aux != null) {
+            if (aux.id == id) {
+                return aux.participante;
+            }
+            aux = aux.siguiente;
+        }
+        return null;
+    }
+    
+    public int getParticipanteId(String cedula){
+        NodoParticipantes aux = this.primero;
+        while (aux != null) {
+            if (aux.participante.getCedula().equals(cedula)) {
+                return aux.id;
+            }
+            aux = aux.siguiente;
+        }
+        return -1;
     }
 }

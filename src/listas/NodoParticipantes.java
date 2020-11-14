@@ -14,27 +14,30 @@ import principal.Participante;
 public class NodoParticipantes {
 	Participante participante; 
 	char categoria;
-	int hora;  
+	int hora; 
+        int id; 
 	NodoParticipantes siguiente; 
 	NodoParticipantes anterior;
 	boolean participoPregunta;
 	
-	public NodoParticipantes(Participante participante, char categoria ){ 
+	public NodoParticipantes(Participante participante, char categoria,int id ){ 
             this.participante = participante; 
             this.categoria = categoria; 
             this.hora = -1;
             this.siguiente = null; 
             this.anterior = null; 
             this.participoPregunta = true; 
+            this.id = id; 
 	}
-        public NodoParticipantes( Participante participante, int hora, char c ){ 
+        public NodoParticipantes( Participante participante, int hora, char c, int id ){ 
 	    this.participante = participante; 
 	    this.hora = hora; 
 	    this.categoria = c; 
 	    this.siguiente = null;
 	    this.anterior = null; 
             this.participoPregunta = true;
+            this.id = id; 
 	}
 	
-	
+        
 }

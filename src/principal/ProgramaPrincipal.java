@@ -29,7 +29,7 @@ public class ProgramaPrincipal {
     
 
     private static void pruebas() {
-
+        /*
         Gestor g = Gestor.get_();
         String aus = "Nike,Adidas,Puma";
         g.guardarAuspiciantes(aus);
@@ -46,6 +46,7 @@ public class ProgramaPrincipal {
         g.registrarHoraLlegada("159", 23);
 
         g.noParticipo("1234");
+        */
 
     }
 
