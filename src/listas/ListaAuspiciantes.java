@@ -16,6 +16,10 @@ public class ListaAuspiciantes {
         this.primero = null;
     }
     
+    public NodoAuspiciante getPrimero(){ 
+        return this.primero;
+    }
+    
     public boolean insertar( String auspiciante ){ 
         NodoAuspiciante nuevo; 
         try{ 
@@ -27,23 +31,15 @@ public class ListaAuspiciantes {
             this.primero = nuevo; 
         else{
             NodoAuspiciante aux = this.primero; 
-            while ( aux.siguiente != null ){ 
-                aux = aux.siguiente;
+            while ( aux.getSiguiente() != null ){ 
+                aux = aux.getSiguiente();
             }
-            aux.siguiente = nuevo;  
+            aux.setSiguiente(nuevo);  
         }
         return true; 
     }
     
-    public void imprimir(){ 
-       NodoAuspiciante aux = this.primero; 
-       int i = 1; 
-       while ( aux != null ){ 
-           System.out.println("["+i+"]"+aux.auspiciante);
-           aux = aux.siguiente;
-           i++;
-       }
-    }
+    
     
     public int length(){ 
         NodoAuspiciante aux = this.primero;
@@ -52,7 +48,7 @@ public class ListaAuspiciantes {
             return 0; 
         while ( aux != null ){
             cantidad++;
-            aux = aux.siguiente; 
+            aux = aux.getSiguiente(); 
         }
         return cantidad; 
     }
@@ -61,20 +57,20 @@ public class ListaAuspiciantes {
         int posActual = 0; 
         NodoAuspiciante aux = this.primero; 
         while ( posActual < pos  ){ 
-            aux = aux.siguiente; 
+            aux = aux.getSiguiente(); 
             posActual++;
         }
-        return aux.auspiciante;
+        return aux.getAuspiciante();
     }
     public boolean existeAuspiciante(String auspiciante ){ 
         NodoAuspiciante aux = this.primero; 
         if ( aux == null )
             return false; 
         while ( aux != null ){ 
-            if ( aux.auspiciante.equals(auspiciante) ){ 
+            if ( aux.getAuspiciante().equals(auspiciante) ){ 
                 return true; 
             }
-            aux = aux.siguiente; 
+            aux = aux.getSiguiente(); 
         }
         return false; 
     }

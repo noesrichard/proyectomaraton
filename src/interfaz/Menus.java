@@ -91,22 +91,15 @@ public class Menus {
                 int opcion = Formularios.menuActualizarParticipante();
                 switch (opcion) {
                     case 1:
-                        p.setNombre(Entrada.campoDeTexto(Entrada.NOMBRE));
-                        break;
+                        Formularios.actualizarNombre(p);
                     case 2:
-                        p.setApellido(Entrada.campoDeTexto(Entrada.APELLIDO));
-                        break;
+                        Formularios.actualizarApellido(p);
                     case 3:
-                        String auspiciantes = Entrada.campoDeTexto(Entrada.AUSPICIANTES);
-                        p.setAuspiciantes(auspiciantes);
-                        g.guardarAuspiciantes(auspiciantes);
-                        break;
+                        Formularios.actualizarAuspiciantes(p);
                     case 4:
-                        p.setEdad(Entrada.campoDeNumeros(Entrada.EDAD));
-                        break;
+                        Formularios.actualizarEdad(p);
                     case 5:
-                        p.setSexo(Entrada.campoDeTexto(Entrada.SEXO).charAt(0));
-                        break;
+                        Formularios.actualizarSexo(p);
                     case 6:
                         volver = true;
                         break;

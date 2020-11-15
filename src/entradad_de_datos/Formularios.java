@@ -9,6 +9,7 @@ import interfaz.Mensajes;
 import principal.Gestor;
 import principal.Participante;
 
+
 /**
  *
  * @author carri
@@ -68,16 +69,20 @@ public class Formularios {
     }
 //----------------------------FORMULARIOS PARA DATOS----------------------------
     public static boolean inscribirParticipante() {
-        String cedula = Entrada.campoDeCedula(Entrada.CEDULA_NUEVA);
+        String cedula = Entrada.campoDeCedula(Entrada.CAMPOS.CEDULA_NUEVA);
         if (!cedula.equals("-1")) {
-            String  nombre = Entrada.campoDeTexto(Entrada.NOMBRE);
-            String  apellido = Entrada.campoDeTexto(Entrada.APELLIDO);
-            int     edad = Entrada.campoDeNumeros(Entrada.EDAD);
-            char    sexo = Entrada.campoDeTexto(Entrada.SEXO).charAt(0);
-            String  auspiciantes = Entrada.campoDeTexto(Entrada.AUSPICIANTES);
+            
+            String  nombre       = Entrada.campoDeTexto(Entrada.CAMPOS.NOMBRE);
+            String  apellido     = Entrada.campoDeTexto(Entrada.CAMPOS.APELLIDO);
+            int     edad         = Entrada.campoDeInt(Entrada.CAMPOS.EDAD);
+            char    sexo         = Entrada.campoDeTexto(Entrada.CAMPOS.SEXO).charAt(0);
+            String  auspiciantes = Entrada.campoDeTexto(Entrada.CAMPOS.AUSPICIANTES);
+            
             g.guardarAuspiciantes(auspiciantes);
+            
             Participante p = new Participante(cedula, nombre, apellido, 
                                             auspiciantes,edad, sexo);
+            
             if (!g.inscribirParticipante(p)) {
                 System.out.println(Mensajes.ERROR.REGISTRAR.txt());
             }
@@ -86,7 +91,7 @@ public class Formularios {
     }
 
     public static boolean visualizarParticipante() {
-        String cedula = Entrada.campoDeCedula(Entrada.CEDULA_EXISTENTE);
+        String cedula = Entrada.campoDeCedula(Entrada.CAMPOS.CEDULA_EXISTENTE);
         Participante p = g.getParticipante(cedula);
         if (p != null) {
             g.imprimirParticipante(p);
@@ -97,7 +102,7 @@ public class Formularios {
     }
 
     public static Participante getParticipante() {
-        String cedula = Entrada.campoDeCedula(Entrada.CEDULA_EXISTENTE);
+        String cedula = Entrada.campoDeCedula(Entrada.CAMPOS.CEDULA_EXISTENTE);
         if (!cedula.equals("-1")) {
             return g.getParticipante(cedula);
         }
@@ -105,7 +110,7 @@ public class Formularios {
     }
 
     public static boolean borrarParticipante() {
-        String cedula = Entrada.campoDeCedula(Entrada.CEDULA_EXISTENTE);
+        String cedula = Entrada.campoDeCedula(Entrada.CAMPOS.CEDULA_EXISTENTE);
         if (g.borrarParticipante(cedula)) {
             System.out.println(Mensajes.NOTIF.BORRADO_EXITO.txt());
         } else {
@@ -116,12 +121,12 @@ public class Formularios {
     }
 
     public static boolean registrarHoraLlegada() {
-        String cedula = Entrada.campoDeCedula(Entrada.CEDULA_EXISTENTE);
+        String cedula = Entrada.campoDeCedula(Entrada.CAMPOS.CEDULA_EXISTENTE);
         if (!cedula.equals("-1")) {
-            String  hora = Entrada.campoDeTiempo(Entrada.HORA);
-            String  min = Entrada.campoDeTiempo(Entrada.MIN);
-            String  seg = Entrada.campoDeTiempo(Entrada.SEG);
-            int     tiempo = Integer.parseInt(hora + min + seg);
+            String  hora    = Entrada.campoDeTexto(Entrada.CAMPOS.HORAS);
+            String  min     = Entrada.campoDeTexto(Entrada.CAMPOS.MINUTOS);
+            String  seg     = Entrada.campoDeTexto(Entrada.CAMPOS.SEGUNDOS);
+            int     tiempo  = Integer.parseInt(hora + min + seg);
             if (g.registrarHoraLlegada(cedula, tiempo)) {
                 System.out.println(Mensajes.NOTIF.TIEMPO.txt());
                 return true;
@@ -131,7 +136,7 @@ public class Formularios {
     }
 
     public static boolean registrarNoParticipe() {
-        String cedula = Entrada.campoDeCedula(Entrada.CEDULA_EXISTENTE);
+        String cedula = Entrada.campoDeCedula(Entrada.CAMPOS.CEDULA_EXISTENTE);
         if (g.noParticipo(cedula)) {
             System.out.println(Mensajes.NOTIF.TIEMPO.txt());
             return true;
@@ -147,6 +152,30 @@ public class Formularios {
     public static int reportePorCategoria() {
         imprimirMenu(Mensajes.MENU_CATEGORIAS.values());
         return Entrada.campoDeMenu(3);
+    }
+    
+    
+    public static boolean actualizarNombre(Participante p){ 
+        p.setNombre(Entrada.campoDeTexto(Entrada.CAMPOS.NOMBRE));
+        return true; 
+    }
+    public static boolean actualizarApellido(Participante p){ 
+        p.setApellido(Entrada.campoDeTexto(Entrada.CAMPOS.APELLIDO));
+        return true; 
+    }
+    public static boolean actualizarAuspiciantes(Participante p){ 
+        String auspiciantes = Entrada.campoDeTexto(Entrada.CAMPOS.AUSPICIANTES);
+        p.setAuspiciantes(auspiciantes);
+        g.guardarAuspiciantes(auspiciantes);
+        return true; 
+    }
+    public static boolean actualizarEdad(Participante p){ 
+        p.setEdad(Entrada.campoDeInt(Entrada.CAMPOS.EDAD));
+        return true; 
+    }
+    public static boolean actualizarSexo(Participante p){ 
+        p.setSexo(Entrada.campoDeTexto(Entrada.CAMPOS.SEXO).charAt(0));
+        return true; 
     }
 
 }

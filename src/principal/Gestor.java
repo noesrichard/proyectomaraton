@@ -8,6 +8,7 @@ package principal;
 import listas.ListaAuspiciantes;
 import listas.ListaParticipantesOrdenada;
 import listas.ListaParticipantes;
+import listas.NodoAuspiciante;
 
 /**
  *
@@ -82,16 +83,19 @@ public class Gestor {
                     listaAuspiciantes.insertar(auspiciante);
                 }
             }
-        } else {
-            if (!listaAuspiciantes.existeAuspiciante(auspiciantes)) {
+        } else if (!listaAuspiciantes.existeAuspiciante(auspiciantes)) {
                 listaAuspiciantes.insertar(auspiciantes);
             }
-        }
-
     }
 
     public void imprimirAuspiciantes() {
-        listaAuspiciantes.imprimir();
+        NodoAuspiciante aux = listaAuspiciantes.getPrimero(); 
+        int i = 1; 
+        while ( aux != null ){ 
+            System.out.println("["+i+"]"+aux.getAuspiciante());
+            aux = aux.getSiguiente();
+            i++;
+        }
     }
 
     public int cantidadDeAuspiciantes() {
