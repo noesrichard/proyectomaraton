@@ -5,7 +5,7 @@
  */
 package interfaz;
 
-import entradad_de_datos.Campos;
+import entradad_de_datos.Entrada;
 import entradad_de_datos.Formularios;
 import principal.Gestor;
 import principal.Participante;
@@ -91,21 +91,21 @@ public class Menus {
                 int opcion = Formularios.menuActualizarParticipante();
                 switch (opcion) {
                     case 1:
-                        p.setNombre(Campos.campoDeTexto(Campos.NOMBRE));
+                        p.setNombre(Entrada.campoDeTexto(Entrada.NOMBRE));
                         break;
                     case 2:
-                        p.setApellido(Campos.campoDeTexto(Campos.APELLIDO));
+                        p.setApellido(Entrada.campoDeTexto(Entrada.APELLIDO));
                         break;
                     case 3:
-                        String auspiciantes = Campos.campoDeTexto(Campos.AUSPICIANTES);
+                        String auspiciantes = Entrada.campoDeTexto(Entrada.AUSPICIANTES);
                         p.setAuspiciantes(auspiciantes);
                         g.guardarAuspiciantes(auspiciantes);
                         break;
                     case 4:
-                        p.setEdad(Campos.campoDeNumeros(Campos.EDAD));
+                        p.setEdad(Entrada.campoDeNumeros(Entrada.EDAD));
                         break;
                     case 5:
-                        p.setSexo(Campos.campoDeTexto(Campos.SEXO).charAt(0));
+                        p.setSexo(Entrada.campoDeTexto(Entrada.SEXO).charAt(0));
                         break;
                     case 6:
                         volver = true;

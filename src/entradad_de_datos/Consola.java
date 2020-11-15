@@ -5,6 +5,7 @@
  */
 package entradad_de_datos;
 
+import entradad_de_datos.Entrada.CAMPOS;
 import java.util.Scanner;
 import validacion.Validador;
 
@@ -28,27 +29,27 @@ public class Consola {
         return instancia;
     }
 
-    public static String ingresarDato(String mensajeEntrada, String mensajeError, String regex) {
+    public static String ingresarDato(CAMPOS campo) {
         String dato;
         while (true) {
-            System.out.print(mensajeEntrada);
+            System.out.print(campo.getPeticion());
             dato = Consola.get_().entrada.nextLine().toUpperCase();
-            if (dato.matches(regex)) {
+            if (dato.matches(campo.getRegex())) {
                 return dato;
             }
-            System.out.println(mensajeError);
+            System.out.println(campo.getError());
         }
     }
 
-    public static String ingresarDato(String mensajeEntrada, String mensajeError, Validador validador) {
+    public static String ingresarDatoConSalida(CAMPOS campo) {
         String dato;
         while (true) {
-            System.out.print(mensajeEntrada);
+            System.out.print(campo.getPeticion());
             dato = Consola.get_().entrada.nextLine().toUpperCase();
-            if (validador.validar(dato) || dato.equals("-1")) {
+            if (campo.getValidador().validar(dato) || dato.equals("-1")) {
                 return dato;
             }
-            System.out.println(mensajeError);
+            System.out.println(campo.getError());
         }
     }
 
